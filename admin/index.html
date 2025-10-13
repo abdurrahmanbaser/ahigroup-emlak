@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yönetim Paneli - Ahi GROUP</title>
+    <style>
+        body { font-family: sans-serif; background-color: #1a1d24; color: #eaeaea; padding: 2rem; }
+        h1, h3 { color: #d4af37; }
+        button { cursor: pointer; }
+        table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+        th, td { padding: 0.75rem; border: 1px solid #252a34; text-align: left; }
+        th { background-color: #252a34; }
+        #add-new-btn { background-color: #d4af37; color: #1a1d24; border: none; padding: 0.75rem 1.5rem; font-size: 1rem; font-weight: bold; border-radius: 5px; margin: 1rem 0; }
+        .edit-btn, .delete-btn { padding: 0.5rem 1rem; border: none; border-radius: 5px; color: white; font-weight: bold; cursor: pointer; margin-right: 5px; transition: opacity 0.2s ease; }
+        .edit-btn { background-color: #3a76f8; }
+        .delete-btn { background-color: #e44d4d; }
+        .edit-btn:hover, .delete-btn:hover { opacity: 0.8; }
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); z-index: 1000; display: flex; justify-content: center; align-items: center; opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s ease; }
+        .modal-overlay.active { opacity: 1; visibility: visible; }
+        .modal-content { background-color: #252a34; padding: 2rem; border-radius: 10px; width: 90%; max-width: 600px; position: relative; max-height: 85vh; overflow-y: auto; }
+        .close-btn { position: absolute; top: 10px; right: 15px; background: none; border: none; color: #fff; font-size: 2.5rem; cursor: pointer; }
+        .form-group { margin-bottom: 1rem; }
+        .form-group label { display: block; margin-bottom: 0.5rem; font-weight: bold; }
+        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 0.75rem; border-radius: 5px; border: 1px solid #444; background-color: #1a1d24; color: #eaeaea; font-size: 1rem; }
+        .form-row { display: flex; gap: 1rem; }
+        .form-row .form-group { flex: 1; }
+        #add-listing-form button { width: 100%; padding: 1rem; border: none; border-radius: 5px; background-color: #d4af37; color: #1a1d24; font-size: 1.1rem; font-weight: 700; cursor: pointer; margin-top: 1rem; }
+        .header-actions {
+    display: flex;
+    justify-content: space-between; /* Butonları iki uca yasla */
+    align-items: center;
+    margin: 1rem 0;
+}
+#logout-btn {
+    background-color: #e44d4d; /* Kırmızı */
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 5px;
+}
+    </style>
+</head>
+<body>
+    <h1>İlan Yönetim Paneli</h1>
+    <div class="header-actions">
+    <button id="add-new-btn">+ Yeni İlan Ekle</button>
+    <button id="logout-btn">Çıkış Yap</button>
+</div>
+<hr>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Başlık</th>
+                <th>Fiyat</th>
+                <th>Tip</th>
+                <th>İşlemler</th>
+            </tr>
+        </thead>
+        <tbody id="listings-table-body">
+            </tbody>
+    </table>
+
+    <div id="add-listing-modal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="close-btn">&times;</button>
+            <h3>Yeni İlan Ekle</h3>
+            <form id="add-listing-form" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="baslik">İlan Başlığı</label>
+                    <input type="text" id="baslik" name="baslik" required>
+                </div>
+                <div class="form-group">
+                    <label for="fiyat">Fiyat</label>
+                    <input type="text" id="fiyat" name="fiyat" required>
+                </div>
+                <div class="form-group">
+                    <label>Mevcut Resimler</label>
+                    <div id="existing-images-container">
+                        <p>Bu ilana ait resim yok.</p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="resimler">Yeni Resim Ekle (Birden fazla seçebilirsiniz)</label>
+                    <input type="file" id="resimler" name="resimler" accept="image/*" multiple>
+                </div>
+                <div class="form-group">
+                    <label for="konum">Konum</label>
+                    <input type="text" id="konum" name="konum" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group"><label for="odaSayisi">Oda Sayısı</label><input type="text" id="odaSayisi" name="odaSayisi"></div>
+                    <div class="form-group"><label for="metrekare">Metrekare (m²)</label><input type="number" id="metrekare" name="metrekare"></div>
+                    <div class="form-group"><label for="banyo">Banyo Sayısı</label><input type="number" id="banyo" name="banyo"></div>
+                </div>
+                <div class="form-group">
+                    <label for="aciklama">Açıklama</label>
+                    <textarea id="aciklama" name="aciklama" rows="5"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="tip">İlan Tipi</label>
+                    <select id="tip" name="tip"><option value="satilik">Satılık</option><option value="kiralik">Kiralık</option></select>
+                </div>
+                <button type="submit">İlanı Kaydet</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="admin-script.js"></script>
+</body>
+</html>
