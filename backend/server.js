@@ -16,6 +16,8 @@ const pool = new Pool({
 
 // Ara yazılımlar
 app.use(cors());
+// 'uploads' klasörünü halka açık yap
+app.use('/uploads', express.static('uploads'));
 app.use(express.static(path.join(__dirname, '..', 'public')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
