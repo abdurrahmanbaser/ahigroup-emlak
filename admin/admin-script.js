@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
      */
     async function fetchAndDisplayListings() {
         try {
-            const response = await fetch('http://localhost:3000/api/ilanlar');
+            const response = await fetch('https://ahigroup-backend.onrender.com/api/ilanlar');
             const ilanlar = await response.json();
 
             tableBody.innerHTML = ''; // Tabloyu temizle
@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Silme butonu olayı
                 row.querySelector('.delete-btn').addEventListener('click', async () => {
                     if (!confirm(`"${ilan.baslik}" başlıklı ilanı silmek istediğinize emin misiniz?`)) return;
-                    await fetch(`http://localhost:3000/api/ilanlar/${ilan.id}`, { method: 'DELETE' });
+                    await fetch(`https://ahigroup-backend.onrender.com/api/ilanlar/${ilan.id}`, { method: 'DELETE' });
                     fetchAndDisplayListings();
                 });
 
@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (ilan.resimler && ilan.resimler.length > 0) {
                         ilan.resimler.forEach(resimUrl => {
                             if (!resimUrl) return; // Boş resim URL'sini atla
-                            const imageUrl = `http://localhost:3000/${resimUrl.replace(/\\/g, '/')}`;
+                            const imageUrl = `https://ahigroup-backend.onrender.com/${resimUrl.replace(/\\/g, '/')}`;
                             const imageWrapper = document.createElement('div');
                             imageWrapper.style.display = 'inline-block';
                             imageWrapper.style.position = 'relative';
@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
         event.preventDefault();
         const formData = new FormData(addListingForm);
         const editingId = addListingForm.getAttribute('data-editing-id');
-        const url = editingId ? `http://localhost:3000/api/ilanlar/${editingId}` : 'http://localhost:3000/api/ilanlar';
+        const url = editingId ? `https://ahigroup-backend.onrender.com/api/ilanlar/${editingId}` : 'https://ahigroup-backend.onrender.com/api/ilanlar';
         const method = editingId ? 'PUT' : 'POST';
 
         try {
