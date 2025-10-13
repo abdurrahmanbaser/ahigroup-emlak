@@ -74,6 +74,7 @@ app.get('/api/ilanlar', async (req, res) => {
 
 // POST: Yeni bir ilan ve resimlerini ekle
 app.post('/api/ilanlar', requireLogin, upload.array('resimler', 10), async (req, res) => {
+  // ...
     const client = await pool.connect();
     try {
         await client.query('BEGIN');
