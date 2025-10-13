@@ -268,7 +268,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="agent-contact-box">
                         <p class="price" style="text-align: center; font-size: 2rem;">${ilan.fiyat}</p>
                         <hr style="border-color: #444; margin: 1rem 0;">
-                        <img src="https://icon-library.com/images/generic-user-icon/generic-user-icon-13.jpg" alt="Danışman" class="agent-photo">
+                        <img src="https://via.placeholder.com/100x100.png?text=Danışman" alt="Danışman" class="agent-photo">
                         <p class="agent-name">Ahi GROUP Danışmanlık</p>
                         <h3>Bu Mülk İçin Bilgi Alın</h3>
                         <form><input type="text" placeholder="Adınız Soyadınız" required><input type="tel" placeholder="Telefon Numaranız" required><textarea placeholder="Merhaba, bu ilan hakkında bilgi almak istiyorum..." rows="4"></textarea><button type="submit">Mesaj Gönder</button></form>
