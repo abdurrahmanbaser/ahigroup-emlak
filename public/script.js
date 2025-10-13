@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         let ilanlar = [];
         try {
-            const response = await fetch('http://localhost:3000/api/ilanlar');
+            const response = await fetch('https://ahigroup-backend.onrender.com/api/ilanlar');
             if (!response.ok) throw new Error('Network response was not ok');
             ilanlar = await response.json();
         } catch (error) {
@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 card.className = 'slide property-card';
                 
                 const anaResim = ilan.resimler && ilan.resimler.length > 0 ? ilan.resimler[0] : null;
-                const imageUrl = anaResim ? `http://localhost:3000/${anaResim.replace(/\\/g, '/')}` : 'https://via.placeholder.com/400x250.png?text=Resim+Yok';
+                const imageUrl = anaResim ? `https://ahigroup-backend.onrender.com/${anaResim.replace(/\\/g, '/')}` : 'https://via.placeholder.com/400x250.png?text=Resim+Yok';
                 
                 card.innerHTML = `<div class="card-image"><img src="${imageUrl}" alt="${ilan.baslik}"><div class="card-price">${ilan.fiyat}</div></div><div class="card-content"><h3>${ilan.baslik}</h3><p>📍 ${ilan.konum}</p><div class="card-features"><span>🛏️ ${ilan.odaSayisi}</span><span>🛁 ${ilan.banyo}</span><span>📐 ${ilan.metrekare} m²</span></div><a href="ilan-detay.html?id=${ilan.id}" class="card-button">Detayları Gör</a></div>`;
                 sliderContainer.appendChild(card);
@@ -143,7 +143,7 @@ document.addEventListener('DOMContentLoaded', () => {
     async function initializeListingsPage() {
         let ilanlar = [];
         try {
-            const response = await fetch('http://localhost:3000/api/ilanlar');
+            const response = await fetch('https://ahigroup-backend.onrender.com/api/ilanlar');
             if (!response.ok) throw new Error('Network response was not ok');
             ilanlar = await response.json();
         } catch (error) {
@@ -165,7 +165,7 @@ document.addEventListener('DOMContentLoaded', () => {
             let allCardsHTML = '';
             propertyList.forEach(ilan => {
                 const anaResim = ilan.resimler && ilan.resimler.length > 0 ? ilan.resimler[0] : null;
-                const imageUrl = anaResim ? `http://localhost:3000/${anaResim.replace(/\\/g, '/')}` : 'https://via.placeholder.com/400x250.png?text=Resim+Yok';
+                const imageUrl = anaResim ? `https://ahigroup-backend.onrender.com/${anaResim.replace(/\\/g, '/')}` : 'https://via.placeholder.com/400x250.png?text=Resim+Yok';
                 allCardsHTML += `<div class="property-card"><div class="card-image"><img src="${imageUrl}" alt="${ilan.baslik}"></div><div class="card-content"><h4>${ilan.fiyat}</h4><h3>${ilan.baslik}</h3><p>📍 ${ilan.konum}</p><div class="card-features"><span>🛏️ ${ilan.odaSayisi}</span><span>🛁 ${ilan.banyo}</span><span>📐 ${ilan.metrekare} m²</span></div><a href="ilan-detay.html?id=${ilan.id}" class="card-button">Detayları Gör</a></div></div>`;
             });
             listingsGrid.innerHTML = allCardsHTML;
@@ -191,7 +191,7 @@ document.addEventListener('DOMContentLoaded', () => {
         async function handleSortChange() {
             try {
                 const sortOption = sortBySelect.value;
-                const response = await fetch(`http://localhost:3000/api/ilanlar?sortBy=${sortOption}`);
+                const response = await fetch(`https://ahigroup-backend.onrender.com/api/ilanlar?sortBy=${sortOption}`);
                 if (!response.ok) throw new Error('Network response was not ok');
                 ilanlar = await response.json(); // Ana listeyi sıralanmış yeni veriyle güncelle
                 applyFiltersOnPage(); // Filtreleri bu yeni sıralanmış liste üzerinde uygula
@@ -227,7 +227,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         let ilan;
         try {
-            const response = await fetch('http://localhost:3000/api/ilanlar');
+            const response = await fetch('https://ahigroup-backend.onrender.com/api/ilanlar');
             if (!response.ok) throw new Error('Network response was not ok');
             const ilanlar = await response.json();
             ilan = ilanlar.find(item => item.id === ilanId);
@@ -245,12 +245,12 @@ document.addEventListener('DOMContentLoaded', () => {
         document.title = `${ilan.baslik} | Ahi GROUP Gayrimenkul`;
 
         const anaResim = ilan.resimler && ilan.resimler.length > 0 ? ilan.resimler[0] : null;
-        const anaResimUrl = anaResim ? `http://localhost:3000/${anaResim.replace(/\\/g, '/')}` : 'https://via.placeholder.com/800x600.png?text=Resim+Yok';
+        const anaResimUrl = anaResim ? `https://ahigroup-backend.onrender.com/${anaResim.replace(/\\/g, '/')}` : 'https://via.placeholder.com/800x600.png?text=Resim+Yok';
         
         let galeriHTML = '';
         if (ilan.resimler && ilan.resimler.length > 1) {
             ilan.resimler.forEach(resimUrl => {
-                galeriHTML += `<img class="thumbnail" src="http://localhost:3000/${resimUrl.replace(/\\/g, '/')}">`;
+                galeriHTML += `<img class="thumbnail" src="https://ahigroup-backend.onrender.com/${resimUrl.replace(/\\/g, '/')}">`;
             });
         }
 
