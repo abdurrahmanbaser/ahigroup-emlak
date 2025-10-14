@@ -101,7 +101,7 @@ app.post('/api/ilanlar', requireLogin, upload.array('resimler', 10), async (req,
 });
 
 // PUT: Mevcut ilanı güncelle (bu daha sonra geliştirilecek)
-app.put('/api/ilanlar/:id', requireLogin, upload.array('resimler', 10), async (req, res) => {
+app.put('/api/ilanlar/:id', requireLogin, upload.any(), async (req, res) => {
     // Şimdilik sadece metin bilgilerini güncelleyelim. Resim güncelleme daha karmaşık.
     try {
         const { id } = req.params;
