@@ -90,12 +90,18 @@ document.addEventListener('DOMContentLoaded', () => {
     /**
      * Yeni ilan ekleme veya düzenleme formunu yönetir.
      */
-    async function handleFormSubmit(event) {
+     async function handleFormSubmit(event) {
         event.preventDefault();
         const formData = new FormData(addListingForm);
         const editingId = addListingForm.getAttribute('data-editing-id');
         const url = editingId ? `https://ahigroup-backend.onrender.com/api/ilanlar/${editingId}` : 'https://ahigroup-backend.onrender.com/api/ilanlar';
         const method = editingId ? 'PUT' : 'POST';
+
+// --- YENİ EKLENECEK CASUS KOD BURAYA ---
+    console.log("FETCH İSTEĞİ GÖNDERİLİYOR:");
+    console.log("URL:", url);
+    console.log("Metot:", method);
+    // ------------------------------------
 
         try {
             const response = await fetch(url, { method: method, body: formData });
