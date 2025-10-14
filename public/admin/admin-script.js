@@ -97,11 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const url = editingId ? `https://ahigroup-backend.onrender.com/api/ilanlar/${editingId}` : 'https://ahigroup-backend.onrender.com/api/ilanlar';
         const method = editingId ? 'PUT' : 'POST';
 
-// --- YENİ EKLENECEK CASUS KOD BURAYA ---
-    console.log("FETCH İSTEĞİ GÖNDERİLİYOR:");
-    console.log("URL:", url);
-    console.log("Metot:", method);
-    // ------------------------------------
+
 
         try {
             const response = await fetch(url, { method: method, body: formData });
